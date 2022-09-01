@@ -1,0 +1,151 @@
+.App {
+  text-align: center;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;	
+	font-family: Raleway, sans-serif;
+}
+
+body {
+	background: linear-gradient(90deg, #282c34,#282c34);		
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+  
+}
+
+.screen {		
+	background: linear-gradient(90deg, #7F5283,#7875B5);		
+	position: relative;	
+	height: 600px;
+	width: 360px;	
+	box-shadow: 0px 0px 8px #000;
+  
+}
+
+.screen_content {
+	z-index: 1;
+	position: relative;	
+	height: 100%;
+}
+
+.screen_background {		
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	-webkit-clip-path: inset(0 0 0 0);
+	clip-path: inset(0 0 0 0);	
+  
+}
+
+.screen_background_shape {
+	transform: rotate(45deg);
+	position: absolute;
+}
+
+
+
+.login {
+	width: 320px;
+	padding: 30px;
+	padding-top: 50px;
+}
+
+.login_field {
+	padding: 20px 0px;	
+	position: relative;	
+}
+
+
+
+.login_input {
+	border: none;
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	font-weight: 700;
+	width: 90%;
+	transition: .2s;
+
+}
+
+.login_input:active,
+.login_input:focus,
+.login_input:hover {
+	outline: none;
+	border-bottom-color: #6A679E;
+  
+}
+
+.login_submit {
+	background: #282c34;
+	font-size: 14px;
+	margin-top: 25px;
+	padding: 16px 20px;
+	border-radius: 26px;
+	border: 1px solid #000;
+	text-transform: uppercase;
+	font-weight: 700;
+	display: flex;
+	width: 100%;
+	color: white;
+	cursor: pointer;
+	transition: .2s;
+}
+
+.login_submit:active,
+.login_submit:focus,
+.login_submit:hover {
+	border-color: #fff;
+	outline: none;
+}
+.button_text{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.router_p{
+	padding-top: 30px;
+	color: #fff;
+	border: none;
+
+}
+
+::placeholder{
+  color:#fff
+}
+
+.form_name{
+  color:white;
+  padding-top: 40px;
+}
