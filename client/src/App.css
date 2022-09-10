@@ -149,3 +149,9 @@ body {
   color:white;
   padding-top: 40px;
 }
+
+.error_message{
+	color: white;
+	font-size: 10px;
+	padding-top: 5px;
+}

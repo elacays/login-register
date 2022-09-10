@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import {Link} from 'react-router-dom'
 
 
@@ -6,36 +7,43 @@ type User = {
 	id?:number,
 	eMail?:string,
 	userName?:string,
-	userPass?:string
+	userPass?:string,
+	confirmPass?:string
 
 }
 
-
-
 function UserRegister() {
-	const [userValue,setUserValue]=useState<User>({})
+	const {register,handleSubmit,watch,formState:{errors}} =useForm<User>()
+
+	
+
+	const onSubmit = handleSubmit((data) => console.log(data));
 
 	useEffect(() => {
-		// tarayıcının başlık bölümünü değiştirmemizi sağlar
-		console.log(userValue)
-	  },[userValue]);
+
+	  },[]);
+
+
+
+
   return (
     <div className="container">
 	<div className="screen">
 		<div className="screen_content">
         <h1 className='form_name'>Register</h1>
-			<form className="login">
+			<form className="login" onSubmit={onSubmit}>
 				<div className="login_field">
-					<input type="text" className="login_input" placeholder="Email" onChange={e=>setUserValue({...userValue,eMail:e.target.value})}/>
+					<input type="text" className="login_input" placeholder="Email" {...register("eMail")}  required/>
 				</div>
 				<div className="login_field">
-					<input type="text" className="login_input" placeholder="User Name" onChange={e=>setUserValue({...userValue,userName:e.target.value})}/>
+					<input type="text" className="login_input" placeholder="User Name" {...register("userName")} required/>
 				</div>
 				<div className="login_field">
-					<input type="password" className="login_input" placeholder="Password" onChange={e=>setUserValue({...userValue,userPass:e.target.value})}/>
+					<input type="password" className="login_input" placeholder="Password" {...register("userPass")} required/>
 				</div>
 				<div className="login_field">
-					<input type="password" className="login_input" placeholder="Password"/>
+					<input type="password" className="login_input" placeholder="Confrim Password" {...register("confirmPass")} required/>
+					<label className="error_message" >{}</label>
 				</div>
 				<button className="button login_submit">
 					<span className="button_text">Register</span>
