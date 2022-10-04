@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express'
 import mongoose from 'mongoose'
 import bodyParser, { json } from 'body-parser'
-import userSchema from "./Model/UserValidation"
+import userSchema from "./Model/UserModel"
 import jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcryptjs'
 import * as dotenv from 'dotenv'
@@ -34,7 +34,7 @@ app.listen(port, () => {
 app.post('/create',(req,res) =>{
     user.eMail=req.body.eMail
     user.userName=req.body.userName
-    user.userPass=bcrypt.hashSync(req.body.userPass)
+    user.userPass=req.body.userPass
      
     db.collection("Users").insertOne(user, function (err, result) {
       if (err) throw err;

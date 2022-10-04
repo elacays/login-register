@@ -1,10 +1,12 @@
 import mongoose, { Schema } from "mongoose"
+import * as bcrypt from 'bcryptjs'
+
+
 interface IUser  {
-	id?:number,
 	eMail:string,
-	userName?:string,
-	userPass?:string,
-	confirmPass?:string
+	userName:string,
+	userPass:string,
+	confirmPass:string
 
 }
 var validateEmail = function(email:any) {
@@ -38,6 +40,12 @@ const UserSchema = new Schema<IUser>({
         maxLength:64
     }
 },{collection:"Users"})
+
+UserSchema.pre("save", async function (next) {
+    const salt = await bcrypt.genSalt()
+    this.userPass = await bcrypt.genSalt(this.userPass , salt)
+})
+
 
 const userSchema = mongoose.model<IUser>("user",UserSchema)
 export default userSchema
