@@ -1,9 +1,8 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Express } from 'express'
 import mongoose from 'mongoose'
 import bodyParser, { json } from 'body-parser'
-import userSchema from "./Model/UserModel"
-import jwt from 'jsonwebtoken'
-import * as bcrypt from 'bcryptjs'
+import { authRouter } from './Routes/AuthRouter'
+
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -17,25 +16,15 @@ db.once("open", function () {
 const app: Express = express();
 const port = process.env.PORT || 5000;
 
-const user = new userSchema()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
+
+app.use(authRouter)
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
 
-app.post('/create',async (req,res) =>{
-    user.eMail= await req.body.eMail
-    user.userName=await req.body.userName
-    user.userPass=await req.body.userPass
-    user.save()
-
-    
-})
 

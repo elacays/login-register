@@ -3,21 +3,19 @@ import { useForm } from 'react-hook-form'
 import {Link} from 'react-router-dom'
 import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
-type User = {
-	id?:number,
-	eMail?:string,
-	userName?:string,
-	userPass?:string,
+interface IUser{
+	eMail:string,
+	userName:string,
+	userPass:string,
 	confirmPass?:string
 
 }
 
 function UserRegister() {
 
-	const {register,handleSubmit,watch,formState:{errors}} =useForm<User>()
+	const {register,handleSubmit,watch,formState:{errors}} =useForm<IUser>()
 	const onSubmit = handleSubmit((data) => 
 	{
-		console.log(data)
 		axios
 	.post(`http://localhost:3000/create`,data)
 		.then(res=>{
