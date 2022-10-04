@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Document, Schema } from 'mongoose';
 import * as bcrypt from 'bcryptjs'
 
 
@@ -6,7 +6,6 @@ interface IUser  {
 	eMail:string,
 	userName:string,
 	userPass:string,
-	confirmPass:string
 
 }
 var validateEmail = function(email:any) {
@@ -29,23 +28,23 @@ const UserSchema = new Schema<IUser>({
         lowercase: true,
         unique: true,
         required: [true,"eMail is Required"],
-        minLength:{value:3,message:"User Name should be at least 3 chars long"},
-        maxLength:64
     },
     userPass:{
         type: String,
         trim: true,
         required: [true,"eMail is Required"],
-        minLength:{value:3,message:"Password should be at least 6 chars long"},
-        maxLength:64
     }
 },{collection:"Users"})
 
-UserSchema.pre("save", async function (next) {
-    const salt = await bcrypt.genSalt()
-    this.userPass = await bcrypt.genSalt(this.userPass , salt)
-})
 
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('userPass')) {
+        return next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.userPass = await bcrypt.hash(this.userPass, salt);
+
+});
 
 const userSchema = mongoose.model<IUser>("user",UserSchema)
 export default userSchema

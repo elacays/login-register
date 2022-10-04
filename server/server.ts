@@ -7,7 +7,6 @@ import * as bcrypt from 'bcryptjs'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-
 mongoose.connect(process.env.DATABASE||"")
 const db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error: "));
@@ -31,15 +30,12 @@ app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
 
-app.post('/create',(req,res) =>{
-    user.eMail=req.body.eMail
-    user.userName=req.body.userName
-    user.userPass=req.body.userPass
-     
-    db.collection("Users").insertOne(user, function (err, result) {
-      if (err) throw err;
-      console.log("1 Recorded Inserted");
-      db.close();
-  });
+app.post('/create',async (req,res) =>{
+    user.eMail= await req.body.eMail
+    user.userName=await req.body.userName
+    user.userPass=await req.body.userPass
+    user.save()
+
+    
 })
 
