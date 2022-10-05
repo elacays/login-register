@@ -1,7 +1,6 @@
-import * as jwt from 'jsonwebtoken'
 import userSchema from "../Model/UserModel"
 import { Request, Response , NextFunction} from 'express';
-import * as bcrypt from 'bcryptjs'
+
 
 const user = new userSchema()
 const validateToken =async (req:Request,res:Response,next:NextFunction)=>{
